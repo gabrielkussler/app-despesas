@@ -1,29 +1,28 @@
-import 'package:appdespesasflutter/Models/transaction.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'models/transaction.dart';
 import 'package:intl/intl.dart';
+
 main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
+    return MaterialApp(home: MyHomePage());
   }
 }
 
 class MyHomePage extends StatelessWidget {
   final _transactions = [
     Transaction(
-        id: 't1',
-        title: 'Novo Tênis de Corrida',
-        value: 310.76,
-        date: DateTime.now()),
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
     Transaction(
       id: 't2',
       title: 'Conta de Luz',
-      value: 219.89,
+      value: 211.30,
       date: DateTime.now(),
     ),
   ];
@@ -32,12 +31,11 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas Pessoais'),
+        title: Text('Depesas Pessoais'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+        children: <Widget>[
           Container(
             child: Card(
               color: Colors.blue,
@@ -49,17 +47,18 @@ class MyHomePage extends StatelessWidget {
             children: _transactions.map((tr) {
               return Card(
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Container(
                       margin: EdgeInsets.symmetric(
                         horizontal: 15,
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Colors.purple,
-                        width: 2,
-                      )),
+                        border: Border.all(
+                          color: Colors.purple,
+                          width: 2,
+                        ),
+                      ),
                       padding: EdgeInsets.all(10),
                       child: Text(
                         'R\$ ${tr.value.toStringAsFixed(2)}',
@@ -72,7 +71,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         Text(
                           tr.title,
                           style: TextStyle(
@@ -83,9 +82,9 @@ class MyHomePage extends StatelessWidget {
                         Text(
                           DateFormat('d MMM y').format(tr.date),
                           style: TextStyle(
-                            color: Colors.grey[700],
+                            color: Colors.grey,
                           ),
-                        )
+                        ),
                       ],
                     )
                   ],
@@ -93,6 +92,36 @@ class MyHomePage extends StatelessWidget {
               );
             }).toList(),
           ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Título',
+                    ),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Valor (R\$)',
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text('Nova Transação'),
+                        textColor: Colors.purple,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
