@@ -20,7 +20,11 @@ class MyHomePage extends StatelessWidget {
         value: 310.76,
         date: DateTime.now()),
     Transaction(
-        id: 't2', title: 'Conta de Luz', value: 219.89, date: DateTime.now()),
+      id: 't2',
+      title: 'Conta de Luz',
+      value: 219.89,
+      date: DateTime.now(),
+    ),
   ];
 
   @override
@@ -43,7 +47,19 @@ class MyHomePage extends StatelessWidget {
           Column(
             children: _transactions.map((tr) {
               return Card(
-                child: Text(tr.title),
+                child: Row(
+                  children: [
+                    Container(
+                      child: Text(tr.value.toString()),
+                    ),
+                    Column(
+                      children: [
+                        Text(tr.title),
+                        Text(tr.date.toString())
+                      ],
+                    )
+                  ],
+                ),
               );
             }).toList(),
           ),
